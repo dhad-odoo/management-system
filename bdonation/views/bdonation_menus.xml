@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="donation_menu_root" name="Blood Donation">
+        <menuitem id="bdonation_first_level_menu" name="Donor">
+            <menuitem id="bdonation_model_menu_action" action="bdonation_donor_action" />
+        </menuitem>
+    </menuitem>
+
+    <!-- <menuitem id="menu_estate_root"
+        name="Real Estate"
+        sequence="9"
+    />
+
+    <menuitem id="menu_estate_advertisement"
+        name="Advertisement"
+        parent="menu_estate_root"
+        action="action_estate_property"
+        sequence="9"
+    /> -->
+
+
+</odoo>

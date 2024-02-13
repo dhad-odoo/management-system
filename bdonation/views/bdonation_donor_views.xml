@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="bdonation_donor_action" model="ir.actions.act_window">
+        <field name="name">Donor</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bdonation.donor</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

@@ -1,7 +1,7 @@
 from odoo import models, fields
 
-class bloodDonor(models.Model):
-    _name = 'blood.donor'
+class bdonationDonor(models.Model):
+    _name = 'bdonation.donor'
     _description = 'Blood Donor'
 
     name = fields.Char(string='Name', required=True)
