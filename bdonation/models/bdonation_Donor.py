@@ -24,3 +24,4 @@ class bdonationDonor(models.Model):
     date_of_birth = fields.Date(string='Date of Birth')
     last_donation_date = fields.Date(string='Last Donation Date')
     notes = fields.Text(string='Notes')
+    doantion_ids =fields.One2many('bdonation.record', 'donor_id', string ='Donation History')

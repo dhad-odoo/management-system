@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <menuitem id="donation_menu_root" name="Blood Donation">
-        <menuitem id="bdonation_first_level_menu" name="Donor">
-            <menuitem id="bdonation_model_menu_action" action="bdonation_donor_action" />
-        </menuitem>
-    </menuitem>
+    <menuitem
+        id="bdonation_menu_root"
+        name="Blood Donation"
+    />
+
+    <menuitem
+        id="bdonation_menu_donor"
+        name="Donors"
+        parent="bdonation_menu_root"
+    />
+
+    <menuitem
+        id="bdonation_menu_donor_donorList"
+        name="Donors List"
+        parent="bdonation_menu_donor"
+        action="bdonation_donor_action"
+    />
+
+
+    <menuitem
+        id="bdonation_menu_inventory"
+        name="Inventory"
+        parent="bdonation_menu_root"
+    />
+
+    <menuitem
+        id="bdonation_menu_inventory_inventoryList"
+        name="Inventory List"
+        parent="bdonation_menu_inventory"
+        action="bdonation_inventory_action"
+    />
+
+
+    <menuitem
+        id="bdonation_menu_record"
+        name="Records"
+        parent="bdonation_menu_root"
+    />
+
+    <menuitem
+        id="bdonation_menu_record_recordList"
+        name="Records List"
+        parent="bdonation_menu_inventory"
+        action="bdonation_record_action"
+    />
 
     <!-- <menuitem id="menu_estate_root"
         name="Real Estate"
@@ -18,6 +58,12 @@
         action="action_estate_property"
         sequence="9"
     /> -->
+
+    <!-- <menuitem id="donation_menu_root" name="Blood Donation">
+        <menuitem id="bdonation_first_level_menu" name="Donor">
+            <menuitem id="bdonation_model_menu_action" action="bdonation_donor_action" />
+        </menuitem>
+    </menuitem> -->
 
 
 </odoo>
