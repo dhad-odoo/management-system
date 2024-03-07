@@ -1,0 +1,37 @@
+blood_donor:
+
+id (Primary Key)
+name (Donor's Name)
+contact_number
+blood_type
+gender
+date_of_birth
+last_donation_date
+notes (Additional notes about the donor)
+age (Computed field)
+
+
+blood_inventory:
+
+id (Primary Key)
+blood_type
+quantity
+expiration_date
+donor_id (Foreign Key referencing blood_donor.id to link with the donor)
+is_expired (Computed field)
+
+
+
+blood_donation_record:
+
+id (Primary Key)
+donor_id (Foreign Key referencing blood_donor.id)
+donation_date
+quantity_donated
+status (e.g., Pending, Completed, Rejected)
+notes (Additional notes about the donation)
+days_since_donation (Computed field)
+
+
+
+

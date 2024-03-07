@@ -4,6 +4,7 @@
     <menuitem
         id="bdonation_menu_root"
         name="Blood Donation"
+        web_icon="bdonation,static/description/blood-donation-icon.png"
     />
 
     <menuitem
