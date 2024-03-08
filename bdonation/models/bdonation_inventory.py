@@ -18,3 +18,4 @@ class BloodInventory(models.Model):
     ], string='Blood Type', required=True)
     quantity = fields.Float(string='Quantity(in ml)', default=0.0)
     expiration_date = fields.Date(string='Expiration Date')
+    is_expired = fields.Boolean(compute="_compute_expiration_date")

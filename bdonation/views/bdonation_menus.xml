@@ -14,7 +14,7 @@
     />
 
     <menuitem
-        id="bdonation_menu_donor_donorList"
+        id="bdonation_menu_donor_List"
         name="Donors List"
         parent="bdonation_menu_donor"
         action="bdonation_donor_action"
@@ -28,7 +28,7 @@
     />
 
     <menuitem
-        id="bdonation_menu_inventory_inventoryList"
+        id="bdonation_menu_inventory_List"
         name="Inventory List"
         parent="bdonation_menu_inventory"
         action="bdonation_inventory_action"
@@ -42,10 +42,36 @@
     />
 
     <menuitem
-        id="bdonation_menu_record_recordList"
+        id="bdonation_menu_record_List"
         name="Records List"
         parent="bdonation_menu_inventory"
         action="bdonation_record_action"
+    />
+
+    <menuitem
+        id="bdonation_menu_blood_groups"
+        name="Blood Groups"
+        parent="bdonation_menu_root"
+    />
+
+    <menuitem
+        id="bdonation_menu_blood_groups_List"
+        name="Blood Groups List"
+        parent="bdonation_menu_blood_groups"
+        action="bdonation_blood_group_action"
+    />
+
+    <menuitem
+        id="bdonation_menu_blood_request"
+        name="Blood Request"
+        parent="bdonation_menu_root"
+    />
+
+    <menuitem
+        id="bdonation_menu_blood_request_List"
+        name="Blood Request List"
+        parent="bdonation_menu_blood_request"
+        action="bdonation_blood_request_action"
     />
 
     <!-- <menuitem id="menu_estate_root"

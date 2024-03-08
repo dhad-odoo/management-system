@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bdonation_blood_request_action" model="ir.actions.act_window">
+        <field name="name">Blood Request</field>
+        <field name="res_model">bdonation.blood.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Blood Requests found!!
+            </p>
+        </field>
+    </record>
+
+    <!-- list/tree view -->
+    <record id="bdonation_blood_request_tree_view" model="ir.ui.view">
+        <field name="name">bdonation.blood.request.tree</field>
+        <field name="model">bdonation.blood.request</field>
+        <field name="arch" type="xml">
+            <tree string="Request Blood List View">
+                <field name="hospital" />
+                <field name="patient_name" />
+                <field name="blood_group_id" />
+                <field name="quantity_req" />
+                <field name="urgency" />
+                <field name="request_status" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- form view -->
+    <record id="bdonation_blood_request_blood_form_view" model="ir.ui.view">
+        <field name="name">bdonation.blood.request.form</field>
+        <field name="model">bdonation.blood.request</field>
+        <field name="arch" type="xml">
+            <form string="Request Blood Form View">
+                <sheet>
+                    <label for="hospital" string="Hospital Name:"></label>
+                    <h1>
+                        <field name="hospital" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="patient_name" />
+                            <field name="blood_group_id" />
+                            <field name="quantity_req" />
+                        </group>
+                        <group>
+                            <field name="urgency" />
+                            <field name="request_status" />
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- search view -->
+    <record id="bdonation_blood_request_search_view" model="ir.ui.view">
+        <field name="name">bdonation.blood.request.search</field>
+        <field name="model">bdonation.blood.request</field>
+        <field name="arch" type="xml">
+            <search string="Request Search View">
+                <field name="hospital" />
+                <field name="patient_name" />
+                <field name="blood_group_id" />
+                <field name="urgency" />
+                <field name="request_status" />
+                <separator />
+                <group expand="1" string="Group By">
+                    <filter string="Hospital" name="hospital" context="{'group_by':'hospital'}" />
+                    <filter string="Patient Name" name="patient_name"
+                        context="{'group_by':'patient_name'}" />
+                    <filter string="Blood Group" name="blood_group_id"
+                        context="{'group_by':'blood_group_id'}" />
+                    <filter string="Urgency" name="urgency" context="{'group_by':'urgency'}" />
+                    <filter string="Request Status" name="request_status"
+                        context="{'group_by':'request_status'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

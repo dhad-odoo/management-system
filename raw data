@@ -35,3 +35,83 @@ days_since_donation (Computed field)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+currently i am working on my custom module in odoo:
+with models as given below:
+
+1)bdonation_blood_group:
+
+name
+donor_ids
+
+2)bdonation_blood_request:
+
+patient_name
+blood_group_id
+hospital
+urgency-{select from urgent, normal, month_later}
+request_status -{select from pending , approved , rejected }
+quantity _required
+
+
+3)bdonation_donor:
+
+name
+contact_number
+date_of_birth
+age
+marital_status
+donor_image   
+donation_interval
+bmi
+height 
+weight 
+gender 
+occupation 
+email_address 
+blood_group_id 
+haemoglobin_levels
+notes 
+donation_ids   
+can_donate
+event_ids 
+    
+    
+    
+    
+4)bdonation_inventory:
+blood_type
+quantity
+expiration_date
+is_expired
+
+
+5)bdonation_record:
+
+donor_id
+donation_id
+quantity_doanted
+
+now i want to use some bridge module that will help me manage my inventory and use exisiting salees, inventory etc modules to make my work more easier

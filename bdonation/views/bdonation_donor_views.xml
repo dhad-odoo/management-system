@@ -8,4 +8,85 @@
     </record>
 
 
+    <record id="bdonation_donor_tree_view" model="ir.ui.view">
+        <field name="name">bdonation.donor.tree</field>
+        <field name="model">bdonation.donor</field>
+        <field name="arch" type="xml">
+            <tree string="Blood Donor">
+                <field name="name" />
+                <field name="blood_group_id" />
+                <field name="age" />
+                <field name="contact_number" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="bdonation_donor_form_view" model="ir.ui.view">
+        <field name="name">bdonation.donor.form</field>
+        <field name="model">bdonation.donor</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- <button name="check_eligibility" class="btn btn-primary"
+                        string="Check Eligibiity" type="object" /> -->
+                    <button string="Check Eligibiity" type="object" name="action_can_donate"
+                        class="oe_highlight" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="contact_number" />
+                            <field name="date_of_birth" />
+                            <field name="age" readonly="1" />
+                            <field name="marital_status" />
+                            <field name="gender" />
+                            <field name="occupation" />
+                        </group>
+                        <group>
+                            <field name="donor_image" />
+                            <field name="blood_group_id" />
+                            <field name="email_address" />
+                            <field name="haemoglobin_levels" />
+                            <field name="donation_interval" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Physical Information">
+                            <group>
+                                <field name="height" />
+                                <field name="weight" />
+                                <field name="bmi" readonly="1" />
+                            </group>
+                        </page>
+                        <page string="Donation History">
+                            <field name="donation_ids" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="donation_date" />
+                                    <field name="quantity_donated" />
+                                    <field name="status" />
+                                    <field name="notes" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Additional Information">
+                            <group>
+                                <field name="notes" />
+                                <field name="event_ids" widget="many2many_tags"
+                                    options="{'no_create': True}" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+
 </odoo>

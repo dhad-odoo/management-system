@@ -2,3 +2,5 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 bdonation.access_bdonation_donor,access_bdonation_donor,bdonation.model_bdonation_donor,base.group_user,1,1,1,1
 bdonation.access_bdonation_inventory,access_bdonation_inventory,bdonation.model_bdonation_inventory,base.group_user,1,1,1,1
 bdonation.access_bdonation_record,access_bdonation_record,bdonation.model_bdonation_record,base.group_user,1,1,1,1
+bdonation.access_bdonation_blood_group,access_bdonation_blood_group,bdonation.model_bdonation_blood_group,base.group_user,1,1,1,1
+bdonation.access_bdonation_blood_request,access_bdonation_blood_request,bdonation.model_bdonation_blood_request,base.group_user,1,1,1,1
