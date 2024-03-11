@@ -7,5 +7,45 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <record id="bdonation_record_form_view" model="ir.ui.view">
+        <field name="name">bdonation.record.form</field>
+        <field name="model">bdonation.record</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Collect Blood" type="object" name="action_collect_blood"
+                        invisible="not status in ['pending']" />
+                    <button string="Start Sample BloodTesting" type="object"
+                        name="action_move_to_tesing_blood"
+                        invisible="not status in ['collected']" />
+                    <button string="Pass Blood Sample" type="object"
+                        name="action_pass_test_blood"
+                        invisible="not status in ['testing']" />
+                    <button string="Reject" type="object" name="action_reject"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="barcode" readonly="1" />
+                        <field name="donor_id" />
+                        <field name="donation_date" />
+                        <field name="quantity_donated" />
+                        <field name="status" />
+                        <field name="notes" />
+                    </group>
+                    <notebook>
+                        <page invisible="not status in ['testing']" string="Test on Blood Sample">
+                            <field name="tests_results" />
+
+                        </page>
+                    </notebook>
+
+                </sheet>
+
+
+            </form>
+        </field>
+    </record>
+
 
 </odoo>

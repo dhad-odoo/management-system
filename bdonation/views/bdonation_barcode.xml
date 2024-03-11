@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="sequence_bdonation_barcode" model="ir.sequence">
+        <field name="name">Blood Donation Barcode Sequence</field>
+        <field name="code">bdonation.barcode.sequence</field>
+        <field name="prefix">BD</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="bdonation_blood_sample_test_result_action"
+        model="ir.actions.act_window">
+        <field name="name">Blood Sample Tests Result</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bdonation.blood.sample.test.result</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
