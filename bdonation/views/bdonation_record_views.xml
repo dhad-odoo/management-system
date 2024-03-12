@@ -23,6 +23,9 @@
                         invisible="not status in ['testing']" />
                     <button string="Convert Blood Sample to Components" type="object"
                         name="action_convert_to_components" invisible="not status in ['completed']" />
+                    <button string="Add to Inventory" type="object"
+                        name="action_add_to_inventory" invisible="not status in ['completed']" />
+
 
                     <button string="Reject" type="object" name="action_reject"
                     />

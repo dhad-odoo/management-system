@@ -15,6 +15,7 @@ class BloodDonationRecord(models.Model):
         ('testing', 'Testing'),
         ('completed', 'Completed'),
         ('converted', 'Converted'),
+        ('add_to_inventory','Add to Inventory'),
         ('rejected', 'Rejected'),
     ], string='Status', default='pending')
     notes = fields.Text(string='Notes')
@@ -42,13 +43,11 @@ class BloodDonationRecord(models.Model):
 
     def action_convert_to_components(self):
         if self.status == 'completed':
-            # Calculate quantities based on percentages
-            total_quantity = self.quantity_donated  # Assuming quantity_donated is available on the record
+            total_quantity = self.quantity_donated 
             plasma_quantity = total_quantity * 0.54
             rbc_quantity = total_quantity * 0.45
             platelets_quantity = total_quantity * 0.01
 
-            # Create instances of 'bdonation.converted.blood.component'
             converted_components_data = [
                 { 'record_id': self.id,'blood_component_type': 'plasma', 'quantity': plasma_quantity},
                 { 'record_id': self.id,'blood_component_type': 'rbc', 'quantity': rbc_quantity},
@@ -57,10 +56,21 @@ class BloodDonationRecord(models.Model):
 
             converted_components = self.env['bdonation.converted.blood.component'].create(converted_components_data)
 
-            # Link the created components to the blood conversion record
             self.converted_component_ids = converted_components
 
             self.write({'status': 'converted'})
+
+    
+    def action_add_to_inventory(self):
+        if self.status == 'completed':
+            inventory_data = [
+                { 'component_type': self.donor_id.blood_group, 'quantity': self.quantity_donated}
+            ]
+
+            converted_components = self.env['bdonation.inventory'].create(inventory_data)
+
+            self.write({'status': 'add_to_inventory'})
+
 
 
     

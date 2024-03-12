@@ -31,6 +31,16 @@ class bdonationDonor(models.Model):
     occupation = fields.Char(string="Occupation")
     email_address = fields.Char(string="Email Address")
     blood_group_id  = fields.Many2one('bdonation.blood.group', string='Blood Group')
+    blood_group= fields.Selection([
+        ('A+', 'A+'),
+        ('B+', 'B+'),
+        ('AB+', 'AB+'),
+        ('O+', 'O+'),
+        ('A-', 'A-'),
+        ('B-', 'B-'),
+        ('AB-', 'AB-'),
+        ('O-', 'O-'),
+    ], string='Blood Type', required=True)
     haemoglobin_levels = fields.Float(string='Haemoglobin levels (gms/hundred ml)')
     notes = fields.Text(string='Notes')
     donation_ids =fields.One2many('bdonation.record', 'donor_id', string ='Donation History')

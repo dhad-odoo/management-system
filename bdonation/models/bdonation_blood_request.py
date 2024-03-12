@@ -17,14 +17,68 @@ class bdonationBloodRequest(models.Model):
         ],
         string='Urgency', default='normal'
     )
-    request_status = fields.Selection([
-        ('pending', 'Pending'),
-        ('approved', 'Approved'),
-        ('rejected', 'Rejected'),
-        ],
-        string='Request Status', default='pending'
-    )
+#     state = fields.Selection([
+#         ('new', 'New'),
+#         ('approved', 'Approved'),
+#         ('assign_record_to_request', 'Assign Record to Request'),
+#         ('complete_request', 'Complete Request'),
+#     ], string='Status', default='new')
+
     quantity_req = fields.Float(string="Blood Quantity Required (ml)", required=True)
+#     product_type = fields.Selection([
+#         ('whole_blood', 'Whole Blood'),
+#         ('plasma', 'Plasma'),
+#         ('rbc', 'Red Blood Cells (RBC)'),
+#         ('platelets', 'Platelets'),
+#     ], string='Product Type', required=True)
+#     num_records_requested = fields.Integer(string='Number of Records Requested', required=True)
+    
+
+
+
+
+#     from odoo import models, fields, api
+
+# class BloodProductRequest(models.Model):
+#     _name = 'bdonation.product.request'
+#     _description = 'Blood Product Request'
+
+#     customer_name = fields.Char(string='Customer Name', required=True)
+#     contact_number = fields.Char(string='Contact Number', required=True)
+#     email_address = fields.Char(string='Email Address')
+#     product_type = fields.Selection([
+#         ('whole_blood', 'Whole Blood'),
+#         ('plasma', 'Plasma'),
+#         ('rbc', 'Red Blood Cells (RBC)'),
+#         ('platelets', 'Platelets'),
+#     ], string='Product Type', required=True)
+#     num_records_requested = fields.Integer(string='Number of Records Requested', required=True)
+#     request_date = fields.Datetime(string='Request Date', default=fields.Datetime.now)
+#     state = fields.Selection([
+#         ('new', 'New'),
+#         ('approved', 'Approved'),
+#         ('assign_record_to_ship', 'Assign Record to Ship'),
+#         ('complete_request', 'Complete Request'),
+#     ], string='Status', default='new')
+
+#     # Add a Many2many field to link the request with selected records
+#     selected_records = fields.Many2many('bdonation.record', string='Selected Records')
+
+#     # ... other fields and methods ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     # def generate_quotation(self):

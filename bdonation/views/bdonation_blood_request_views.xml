@@ -10,9 +10,10 @@
             </p>
         </field>
     </record>
-
+    <!-- 
     <!-- list/tree view -->
-    <record id="bdonation_blood_request_tree_view" model="ir.ui.view">
+    <record
+        id="bdonation_blood_request_tree_view" model="ir.ui.view">
         <field name="name">bdonation.blood.request.tree</field>
         <field name="model">bdonation.blood.request</field>
         <field name="arch" type="xml">
@@ -28,7 +29,8 @@
     </record>
 
     <!-- form view -->
-    <record id="bdonation_blood_request_blood_form_view" model="ir.ui.view">
+    <record
+        id="bdonation_blood_request_blood_form_view" model="ir.ui.view">
         <field name="name">bdonation.blood.request.form</field>
         <field name="model">bdonation.blood.request</field>
         <field name="arch" type="xml">
@@ -60,7 +62,8 @@
     </record>
 
     <!-- search view -->
-    <record id="bdonation_blood_request_search_view" model="ir.ui.view">
+    <record
+        id="bdonation_blood_request_search_view" model="ir.ui.view">
         <field name="name">bdonation.blood.request.search</field>
         <field name="model">bdonation.blood.request</field>
         <field name="arch" type="xml">
@@ -84,4 +87,4 @@
             </search>
         </field>
     </record>
-</odoo>
+    --> </odoo>

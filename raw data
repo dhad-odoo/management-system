@@ -115,3 +115,58 @@ donation_id
 quantity_doanted
 
 now i want to use some bridge module that will help me manage my inventory and use exisiting salees, inventory etc modules to make my work more easier
+
+
+i have two models given below. in total there are 4 products that i sell 
+product 1)"whole blood"( represented by records of 'bdonation.record' model),
+product 2)"Plasma"( represented by records of 'bdonation.converted.blood.component' model which have 'blood_component_type'='Plasma'),
+product 1)"RBC"( represented by records of 'bdonation.converted.blood.component' model which have 'blood_component_type'='RBC'),
+product 1)"Platelates"( represented by records of 'bdonation.converted.blood.component' model which have 'blood_component_type'='Platelates'), 
+
+Now i want to sell these 4 products to customers .
+Customers can make 'blood request' for any one of the 4 products.
+blood request has states as ('new','approved','assign record to ship', 'complete request')
+a) at starting request is 'new' state-  a button'approve' is visible , onclick this button will move state to 'approved'
+b) at 'approved' state - in form view of curent record, a page is visible which shows all avaiable records(is_sold=false) related to that product type like 
+eg : if product type for request is 'whole blood' then records of model 'BloodDonationRecord' are shown 
+    similarly if product type for request is 'Plasma' then records of model 'ConvertedBloodComponent' are shown which have 'blood_component_type'='Plasma'
+
+Then we can select requried records that are to be shipped for current request. Then click 'assign record to ship'.So, now for all the records assigned for current_request we set is_sold=true. Then request moves to state = 'assign record to ship'
+ c) at 'assign record to ship' state- we can finalize the request and by click of button 'complete request'
+
+
+
+1)class BloodDonationRecord(models.Model):
+    _name = 'bdonation.record'
+    _description = 'Blood Donation Record'
+
+    donor_id = fields.Many2one('bdonation.donor', string='Donor', required=True)
+    donation_date = fields.Date(string='Donation Date', default=fields.Date.today())
+    quantity_donated = fields.Float(string='Quantity Donated(in ml)', default=470.0, readonly=True)
+    status = fields.Selection([
+        ('pending', 'Pending'),
+        ('collected', 'Collected'),
+        ('testing', 'Testing'),
+        ('completed', 'Completed'),
+        ('converted', 'Converted'),
+        ('rejected', 'Rejected'),
+    ], string='Status', default='pending')
+    notes = fields.Text(string='Notes')
+    tests_results = fields.One2many('bdonation.blood.sample.test.result', 'donation_record_id', string='Test Results')
+    barcode = fields.Char(string='Barcode')
+    converted_component_ids= fields.One2many('bdonation.converted.blood.component', 'record_id', string ='Converted Components')
+    is_sold=fields.boolean(default=false)
+
+
+2)class ConvertedBloodComponent(models.Model):
+    _name = 'bdonation.converted.blood.component'
+    _description = 'Converted Blood Component'
+
+    record_id = fields.Many2one('bdonation.record', string='Record used for this componet extraction', required =True)
+    blood_component_type = fields.Selection([
+        ('plasma', 'Plasma'),
+        ('rbc', 'Red Blood Cells (RBC)'),
+        ('platelates', 'Platelates')
+    ], string='Blood Component Type',required=True)
+    quantity = fields.Float(string='Quantity (in ml)')
+    is_sold=fields.boolean(default=false)
