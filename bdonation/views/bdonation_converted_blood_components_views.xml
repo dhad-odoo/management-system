@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="bdonation_converted_blood_components_action"
+        model="ir.actions.act_window">
+        <field name="name">Converted Blood Components</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bdonation.converted.blood.component</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -87,6 +87,20 @@
         action="bdonation_blood_sample_test_action"
     />
 
+
+    <menuitem
+        id="bdonation_menu_blood_Converted_components"
+        name="Blood Components"
+        parent="bdonation_menu_root"
+    />
+
+    <menuitem
+        id="bdonation_menu_blood_Converted_components_List"
+        name="Blood Components List"
+        parent="bdonation_menu_blood_Converted_components"
+        action="bdonation_converted_blood_components_action"
+    />
+
     <!-- <menuitem id="menu_estate_root"
         name="Real Estate"
         sequence="9"

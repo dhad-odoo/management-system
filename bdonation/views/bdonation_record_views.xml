@@ -21,6 +21,9 @@
                     <button string="Pass Blood Sample" type="object"
                         name="action_pass_test_blood"
                         invisible="not status in ['testing']" />
+                    <button string="Convert Blood Sample to Components" type="object"
+                        name="action_convert_to_components" invisible="not status in ['completed']" />
+
                     <button string="Reject" type="object" name="action_reject"
                     />
                 </header>
@@ -36,6 +39,11 @@
                     <notebook>
                         <page invisible="not status in ['testing']" string="Test on Blood Sample">
                             <field name="tests_results" />
+
+                        </page>
+                        <page invisible="not status in ['converted']"
+                            string="Converted Blood Components">
+                            <field name="converted_component_ids" />
 
                         </page>
                     </notebook>
