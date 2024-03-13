@@ -13,5 +13,5 @@ class BloodGroup(models.Model):
 
     name = fields.Char(string = "Blood Group")
 
-    donor_ids = fields.One2many('bdonation.donor', 'blood_group_id', string="Donors")
+    # donor_ids = fields.One2many('bdonation.donor', 'blood_group_id', string="Donors")
     

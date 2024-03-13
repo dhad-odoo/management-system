@@ -30,7 +30,7 @@ class bdonationDonor(models.Model):
     )
     occupation = fields.Char(string="Occupation")
     email_address = fields.Char(string="Email Address")
-    blood_group_id  = fields.Many2one('bdonation.blood.group', string='Blood Group')
+    # blood_group_id  = fields.Many2one('bdonation.blood.group', string='Blood Group')
     blood_group= fields.Selection([
         ('A+', 'A+'),
         ('B+', 'B+'),

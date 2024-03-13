@@ -166,7 +166,133 @@ Then we can select requried records that are to be shipped for current request. 
     blood_component_type = fields.Selection([
         ('plasma', 'Plasma'),
         ('rbc', 'Red Blood Cells (RBC)'),
-        ('platelates', 'Platelates')
+        ('platelets', 'Platelets')
     ], string='Blood Component Type',required=True)
     quantity = fields.Float(string='Quantity (in ml)')
     is_sold=fields.boolean(default=false)
+
+
+
+
+
+
+
+
+
+
+
+i have two models given below. I when record is in completed stage there should be button 'add to inventory' , onlick of this button,the new create is record in invetory for current_record and set current record state='added to inventory'
+
+1)class BloodDonationRecord(models.Model):
+    _name = 'bdonation.record'
+    _description = 'Blood Donation Record'
+
+    donor_id = fields.Many2one('bdonation.donor', string='Donor', required=True)
+    donation_date = fields.Date(string='Donation Date', default=fields.Date.today())
+    quantity_donated = fields.Float(string='Quantity Donated(in ml)', default=470.0, readonly=True)
+    status = fields.Selection([
+        ('pending', 'Pending'),
+        ('collected', 'Collected'),
+        ('testing', 'Testing'),
+        ('completed', 'Completed'),
+        ('converted', 'Converted'),
+        ('added to inventory','Added to Inventory'),
+        ('rejected', 'Rejected'),
+    ], string='Status', default='pending')
+    notes = fields.Text(string='Notes')
+    tests_results = fields.One2many('bdonation.blood.sample.test.result', 'donation_record_id', string='Test Results')
+    barcode = fields.Char(string='Barcode')
+    converted_component_ids= fields.One2many('bdonation.converted.blood.component', 'record_id', string ='Converted Components')
+    is_sold=fields.boolean(default=false)
+
+
+2)class ConvertedBloodComponent(models.Model):
+    _name = 'bdonation.converted.blood.component'
+    _description = 'Converted Blood Component'
+
+    record_id = fields.Many2one('bdonation.record', string='Record used for this componet extraction', required =True)
+    blood_component_type = fields.Selection([
+        ('plasma', 'Plasma'),
+        ('rbc', 'Red Blood Cells (RBC)'),
+        ('platelets', 'Platelets')
+    ], string='Blood Component Type',required=True)
+    quantity = fields.Float(string='Quantity (in ml)')
+    is_sold=fields.boolean(default=false)
+
+
+
+
+i have model(bdonation_inventory) , i want to sell records of the inventory in model(bdnoation_blood_request)
+
+1)
+class BloodInventory(models.Model):
+    _name = 'bdonation.inventory'
+    _description = 'Blood Bank Inventory'
+
+    component_type = fields.Selection([
+        ('A+', 'A+'),
+        ('B+', 'B+'),
+        ('AB+', 'AB+'),
+        ('O+', 'O+'),
+        ('A-', 'A-'),
+        ('B-', 'B-'),
+        ('AB-', 'AB-'),
+        ('O-', 'O-'),
+    ], string='Component Type', required=True)
+    quantity = fields.Float(string='Quantity(in ml)', default=0.0)
+    status = fields.Selection([
+        ('inventory','Inventory'),
+        ('sold', 'Sold'),
+        ('expired','Expired')
+    ], string ='Status', required=True, default='inventory')
+    request_id= fields.Many2one('bdonation.blood.request', string= 'Record assigned to Request')
+
+
+2)
+class bdonationBloodRequest(models.Model):
+    _name = "bdonation.blood.request"
+    _description = "Request Blood"
+
+    patient_name = fields.Char(required=True, string="Patient Name")
+    hospital = fields.Char(required=True, string="Hospital's Name")
+    urgency = fields.Selection(
+        [
+        ('urgent', 'Urgent'),
+        ('normal', 'Normal'),
+        ('month_later', 'After a month')
+        ],
+        string='Urgency', default='normal'
+    )
+    num_records_requested = fields.Integer(string='Number of Packets Requested', required=True)
+    blood_group = fields.Selection([
+        ('A+', 'A+'),
+        ('B+', 'B+'),
+        ('AB+', 'AB+'),
+        ('O+', 'O+'),
+        ('A-', 'A-'),
+        ('B-', 'B-'),
+        ('AB-', 'AB-'),
+        ('O-', 'O-'),
+    ], string='Component Type', required=True)
+    state = fields.Selection([
+        ('new', 'New'),
+        ('approved', 'Approved'),
+        ('assign_packets_to_request', 'Assign Packets to Request'),
+        ('complete_request', 'Complete Request'),
+    ], string='Status', default='new')
+    
+
+    if in request it is mentioned that 'num_records_requested'=2,
+    When request is in state='approed' then user should be able to select 2 records 
+    from all the shown records of model (inventory), When user click on button "Assign Packets to Request",
+    then set state='assign_packets_to_request' 
+    and change value of selected records of model (inventory) to state='sold'
+    
+
+
+
+
+
+
+
+

@@ -48,7 +48,7 @@
         action="bdonation_record_action"
     />
 
-    <menuitem
+    <!-- <menuitem
         id="bdonation_menu_blood_groups"
         name="Blood Groups"
         parent="bdonation_menu_root"
@@ -59,7 +59,7 @@
         name="Blood Groups List"
         parent="bdonation_menu_blood_groups"
         action="bdonation_blood_group_action"
-    />
+    /> -->
 
     <menuitem
         id="bdonation_menu_blood_request"

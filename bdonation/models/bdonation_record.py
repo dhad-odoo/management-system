@@ -22,6 +22,8 @@ class BloodDonationRecord(models.Model):
     tests_results = fields.One2many('bdonation.blood.sample.test.result', 'donation_record_id', string='Test Results')
     barcode = fields.Char(string='Barcode')
     converted_component_ids= fields.One2many('bdonation.converted.blood.component', 'record_id', string ='Converted Components')
+    inventory_id= fields.Many2one('bdonation.inventory', string= 'Added to inventory at : ', readonly=True)
+
 
     def action_collect_blood(self):
         timestamp = int(datetime.datetime.now().timestamp())
@@ -51,7 +53,7 @@ class BloodDonationRecord(models.Model):
             converted_components_data = [
                 { 'record_id': self.id,'blood_component_type': 'plasma', 'quantity': plasma_quantity},
                 { 'record_id': self.id,'blood_component_type': 'rbc', 'quantity': rbc_quantity},
-                { 'record_id': self.id, 'blood_component_type': 'platelates','quantity': platelets_quantity},
+                { 'record_id': self.id, 'blood_component_type': 'platelets','quantity': platelets_quantity},
             ]
 
             converted_components = self.env['bdonation.converted.blood.component'].create(converted_components_data)
@@ -63,12 +65,15 @@ class BloodDonationRecord(models.Model):
     
     def action_add_to_inventory(self):
         if self.status == 'completed':
+
             inventory_data = [
                 { 'component_type': self.donor_id.blood_group, 'quantity': self.quantity_donated}
             ]
 
-            converted_components = self.env['bdonation.inventory'].create(inventory_data)
+            print(inventory_data)
 
+            inventory_record = self.env['bdonation.inventory'].create(inventory_data)
+            self.inventory_id=inventory_record
             self.write({'status': 'add_to_inventory'})
 
 

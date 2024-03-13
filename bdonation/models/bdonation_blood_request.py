@@ -1,13 +1,15 @@
-from odoo import fields, models
+from odoo import fields, models,api
+
+
+from odoo.exceptions import UserError, ValidationError
 
 class bdonationBloodRequest(models.Model):
     _name = "bdonation.blood.request"
     _description = "Request Blood"
-    _inherit = ['mail.thread', 'mail.activity.mixin']
-    _rec_name = "hospital"
+    # _inherit = ['mail.thread', 'mail.activity.mixin']
+    # _rec_name = "hospital"
 
     patient_name = fields.Char(required=True, string="Patient Name")
-    blood_group_id  = fields.Many2one('bdonation.blood.group', string='Blood Group')
     hospital = fields.Char(required=True, string="Hospital's Name")
     urgency = fields.Selection(
         [
@@ -17,21 +19,70 @@ class bdonationBloodRequest(models.Model):
         ],
         string='Urgency', default='normal'
     )
-#     state = fields.Selection([
-#         ('new', 'New'),
-#         ('approved', 'Approved'),
-#         ('assign_record_to_request', 'Assign Record to Request'),
-#         ('complete_request', 'Complete Request'),
-#     ], string='Status', default='new')
+    num_records_requested = fields.Integer(string='Number of Packets Requested', required=True)
+    component_type = fields.Selection([
+        ('A+', 'A+'),
+        ('B+', 'B+'),
+        ('AB+', 'AB+'),
+        ('O+', 'O+'),
+        ('A-', 'A-'),
+        ('B-', 'B-'),
+        ('AB-', 'AB-'),
+        ('O-', 'O-'),
+        ('plasma', 'Plasma'),
+        ('rbc', 'Red Blood Cells (RBC)'),
+        ('platelets', 'Platelets'),
+    ], string='Blood Group / Component Type to order', required=True)
+    state = fields.Selection([
+        ('new', 'New'),
+        ('approved', 'Approved'),
+        ('assign_packets_to_request', 'Assign Packets to Request'),
+        ('complete_request', 'Complete Request'),
+        ('cancel','Cancel'),
+    ], string='Status', default='new')
+    inventory_records = fields.Many2many('bdonation.inventory', string='Inventory Records',domain = "[('status', '=', 'inventory'), ('component_type', '=', component_type)]")
+    # inventory_records = fields.One2many('bdonation.inventory', 'request_id', string='Inventory Records')
 
-    quantity_req = fields.Float(string="Blood Quantity Required (ml)", required=True)
-#     product_type = fields.Selection([
-#         ('whole_blood', 'Whole Blood'),
-#         ('plasma', 'Plasma'),
-#         ('rbc', 'Red Blood Cells (RBC)'),
-#         ('platelets', 'Platelets'),
-#     ], string='Product Type', required=True)
-#     num_records_requested = fields.Integer(string='Number of Records Requested', required=True)
+    # @api.onchange('component_type','state')
+    # def _onchange_state(self):
+    #     if self.state == 'approved':
+    #         domain = [ ('component_type', '=', self.component_type)]
+    #         inventory_records = self.env['bdonation.inventory'].search(domain)
+    #         return {'domain': {'inventory_records': [('id', 'in', inventory_records.ids)]}}
+
+    # @api.onchange('component_type')
+    # def _onchange_blood_group(self):
+    #     if self.blood_group:
+    #         domain = [('status', '=', 'inventory'), ('component_type', '=', self.component_type)]
+    #         return {'domain': {'inventory_records': domain}}
+    
+    
+    
+
+        
+    def action_approve_request(self):
+        self.write({'state': 'approved'})
+
+
+    def action_assign_packets_to_request(self):
+        if len(self.inventory_records) != self.num_records_requested:
+            raise ValidationError("Please select the correct number of inventory records.")
+        
+        for record in self.inventory_records:
+            record.status = 'sold'
+            record.request_id = self.id
+
+        self.state = 'assign_packets_to_request'
+
+
+    
+    def action_complete_request(self):
+        self.write({'state': 'complete_request'})
+
+    
+
+    def action_cancel_request(self):
+        self.write({'state': 'cancel'})
     
 
 

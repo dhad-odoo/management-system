@@ -4,6 +4,64 @@
         <field name="name">Inventory</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">bdonation.inventory</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,graph</field>
     </record>
+
+
+    <record id="view_bdonation_inventory_form" model="ir.ui.view">
+        <field name="name">bdonation.inventory.form</field>
+        <field name="model">bdonation.inventory</field>
+        <field name="arch" type="xml">
+            <form string="Blood Bank Inventory">
+                <sheet>
+                    <group>
+                        <field name="component_type" />
+                        <field name="quantity" />
+                        <field name="status" />
+                        <field name="request_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_bdonation_inventory_tree" model="ir.ui.view">
+        <field name="name">bdonation.inventory.tree</field>
+        <field name="model">bdonation.inventory</field>
+        <field name="arch" type="xml">
+            <tree string="Blood Bank Inventory">
+                <field name="component_type" />
+                <field name="quantity" />
+                <field name="status" />
+                <field name="request_id" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_bdonation_inventory_search" model="ir.ui.view">
+        <field name="name">bdonation.inventory.search</field>
+        <field name="model">bdonation.inventory</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="component_type" />
+                <field name="status" />
+            </search>
+        </field>
+    </record>
+
+
+    <record id="view_bdonation_inventory_graph" model="ir.ui.view">
+        <field name="name">bdonation.inventory.graph</field>
+        <field name="model">bdonation.inventory</field>
+        <field name="arch" type="xml">
+            <graph string="Blood Inventory by Component Type" type="pie">
+                <field name="component_type" />
+                <field name="quantity" sum="total" />
+            </graph>
+        </field>
+    </record>
+
+
 </odoo>

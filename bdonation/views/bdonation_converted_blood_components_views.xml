@@ -7,4 +7,55 @@
         <field name="res_model">bdonation.converted.blood.component</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+
+    <record id="view_bdonation_converted_blood_component_form" model="ir.ui.view">
+        <field name="name">bdonation.converted.blood.component.form</field>
+        <field name="model">bdonation.converted.blood.component</field>
+        <field name="arch" type="xml">
+            <form string="Converted Blood Component">
+                <header>
+                    <button name="action_add_to_inventory" string="Add to Inventory"
+                        type="object" invisible="not status in ['new']" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="record_id" />
+                        <field name="blood_component_type" />
+                        <field name="status" />
+                        <field name="quantity" />
+                        <field name="inventory_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bdonation_converted_blood_component_tree" model="ir.ui.view">
+        <field name="name">bdonation.converted.blood.component.tree</field>
+        <field name="model">bdonation.converted.blood.component</field>
+        <field name="arch" type="xml">
+            <tree string="Converted Blood Components">
+                <field name="record_id" />
+                <field name="blood_component_type" />
+                <field name="status" />
+                <field name="quantity" />
+                <field name="inventory_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_bdonation_converted_blood_component_search" model="ir.ui.view">
+        <field name="name">bdonation.converted.blood.component.search</field>
+        <field name="model">bdonation.converted.blood.component</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="record_id" />
+                <field name="blood_component_type" />
+                <field name="status" />
+            </search>
+        </field>
+    </record>
+
+
 </odoo>

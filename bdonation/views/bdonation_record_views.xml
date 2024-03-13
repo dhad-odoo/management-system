@@ -4,7 +4,7 @@
         <field name="name">Record</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">bdonation.record</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
     </record>
 
     <record id="bdonation_record_form_view" model="ir.ui.view">
@@ -26,9 +26,11 @@
                     <button string="Add to Inventory" type="object"
                         name="action_add_to_inventory" invisible="not status in ['completed']" />
 
-
                     <button string="Reject" type="object" name="action_reject"
                     />
+
+                    <field name="status" widget="statusbar"
+                        statusbar_visible="pending,collected,testing, completed" />
                 </header>
                 <sheet>
                     <group>
@@ -38,6 +40,7 @@
                         <field name="quantity_donated" />
                         <field name="status" />
                         <field name="notes" />
+                        <field name="inventory_id" />
                     </group>
                     <notebook>
                         <page invisible="not status in ['testing']" string="Test on Blood Sample">
@@ -55,6 +58,62 @@
 
 
             </form>
+        </field>
+    </record>
+
+
+    <record id="view_bdonation_record_tree" model="ir.ui.view">
+        <field name="name">bdonation.record.tree</field>
+        <field name="model">bdonation.record</field>
+        <field name="arch" type="xml">
+            <tree string="Blood Donation Records">
+                <field name="donor_id" />
+                <field name="donation_date" />
+                <field name="quantity_donated" />
+                <field name="status" />
+                <field name="barcode" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_bdonation_record_search" model="ir.ui.view">
+        <field name="name">bdonation.record.search</field>
+        <field name="model">bdonation.record</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="donor_id" />
+                <field name="donation_date" />
+                <field name="status" />
+            </search>
+        </field>
+    </record>
+
+
+    <record id="view_bdonation_record_kanban" model="ir.ui.view">
+        <field name="name">bdonation.record.kanban</field>
+        <field name="model">bdonation.record</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="status" records_draggable="true" groups_draggable="true"
+                group_edit="write">
+                <field name="status" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <field name="donor_id" />
+                                </strong>
+                                <div>
+                                    <field name="donation_date" />
+                                </div>
+                                <div><field name="quantity_donated" /> ml</div>
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 

@@ -7,4 +7,48 @@
         <field name="res_model">bdonation.blood.sample.test.result</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+
+    <record id="view_bdonation_blood_sample_test_result_form" model="ir.ui.view">
+        <field name="name">bdonation.blood.sample.test.result.form</field>
+        <field name="model">bdonation.blood.sample.test.result</field>
+        <field name="arch" type="xml">
+            <form string="Blood Donation Test Result">
+                <sheet>
+                    <group>
+                        <field name="donation_record_id" />
+                        <field name="test_name" />
+                        <field name="result" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bdonation_blood_sample_test_result_tree" model="ir.ui.view">
+        <field name="name">bdonation.blood.sample.test.result.tree</field>
+        <field name="model">bdonation.blood.sample.test.result</field>
+        <field name="arch" type="xml">
+            <tree string="Blood Donation Test Results">
+                <field name="donation_record_id" />
+                <field name="test_name" />
+                <field name="result" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_bdonation_blood_sample_test_result_search" model="ir.ui.view">
+        <field name="name">bdonation.blood.sample.test.result.search</field>
+        <field name="model">bdonation.blood.sample.test.result</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="donation_record_id" />
+                <field name="test_name" />
+                <field name="result" />
+            </search>
+        </field>
+    </record>
+
+
 </odoo>

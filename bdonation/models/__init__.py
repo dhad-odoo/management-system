@@ -5,4 +5,4 @@ from . import bdonation_blood_group
 from . import bdonation_blood_request
 from . import bdonation_blood_sample_test
 from . import bdonation_blood_sample_test_result
-from . import bdoantion_converted_blood_components
+from . import bdonation_converted_blood_components
