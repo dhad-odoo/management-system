@@ -37,7 +37,7 @@
                 <sheet>
                     <group>
                         <field name="patient_name" />
-                        <field name="hospital" />
+                        <field name="hospital_id" />
                         <field name="urgency" />
                         <field name="num_records_requested" />
                         <field name="component_type" />
@@ -57,7 +57,7 @@
         <field name="arch" type="xml">
             <tree string="Blood Requests">
                 <field name="patient_name" />
-                <field name="hospital" />
+                <field name="hospital_id" />
                 <field name="urgency" />
                 <field name="num_records_requested" />
                 <field name="component_type" />
@@ -72,7 +72,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="patient_name" />
-                <field name="hospital" />
+                <field name="hospital_id" />
                 <field name="urgency" />
                 <field name="component_type" />
                 <field name="state" />
@@ -109,7 +109,7 @@
                                     <field name="patient_name" />
                                 </strong>
                                 <div>
-                                    <field name="hospital" />
+                                    <field name="hospital_id" />
                                 </div>
                                 <div><field name="component_type" /> ml</div>
                                 <div>

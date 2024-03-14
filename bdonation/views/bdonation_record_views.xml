@@ -94,8 +94,8 @@
         <field name="name">bdonation.record.kanban</field>
         <field name="model">bdonation.record</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="status" records_draggable="true" groups_draggable="true"
-                group_edit="write">
+            <kanban default_group_by="status"
+                records_draggable="false">
                 <field name="status" />
                 <templates>
                     <t t-name="kanban-box">

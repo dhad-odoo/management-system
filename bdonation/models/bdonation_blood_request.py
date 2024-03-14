@@ -10,7 +10,10 @@ class bdonationBloodRequest(models.Model):
     # _rec_name = "hospital"
 
     patient_name = fields.Char(required=True, string="Patient Name")
-    hospital = fields.Char(required=True, string="Hospital's Name")
+    # hospital = fields.Char(required=True, string="Hospital's Name")
+    hospital_id = fields.Many2one(
+        "res.partner", string="Hospital's Name",required=True
+    )
     urgency = fields.Selection(
         [
         ('urgent', 'Urgent'),
